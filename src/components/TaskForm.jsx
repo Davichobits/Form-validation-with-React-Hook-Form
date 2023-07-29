@@ -1,10 +1,12 @@
 import { useDispatch } from "react-redux"
 import { addTask } from "../features/tasks/taskSlice"
 import {v4 as uuid} from 'uuid'
+import { useNavigate } from "react-router-dom"
 
 export const TaskForm = () => {
 
   const dispatch =  useDispatch()
+  const navigate = useNavigate()
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -15,13 +17,17 @@ export const TaskForm = () => {
       completed: false,
     }
     dispatch(addTask(newTask))
+    navigate('/')
   }
 
   return (
-    <form action="" onSubmit={handleSubmit}>
-      <input name='title' type="text" placeholder='title' />
-      <textarea name="description" placeholder='description'></textarea>
-      <input type="submit" />
-    </form>
+    <>
+      <h2>Ingresa una tarea:</h2>
+      <form action="" onSubmit={handleSubmit}>
+        <input name='title' type="text" placeholder='title' />
+        <textarea name="description" placeholder='description'></textarea>
+        <input type="submit" />
+      </form>
+    </>
   )
 }
